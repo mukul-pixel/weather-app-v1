@@ -1,4 +1,4 @@
-import { rainSvgIcon } from "../../public/svg/forecastIcon";
+import { rainSvgIcon } from "../../public/svg/Icons"
 
 export const hourly = [
     {
