@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* item1- backgroundimage */
+.item1ComponentWrap{
+  /* background-image: url(""); */
+  background-size: cover;
+  background-position: center;
+  /* background-color: black; */
+}
+
+
+
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

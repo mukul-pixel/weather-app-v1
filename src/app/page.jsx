@@ -10,8 +10,8 @@ import WindCard from "@/components/item2/WindCard";
 export default function Home() {
   return (
     <div >
-      <div className="w-full h-[800px] m-4">
-        <div className="w-[97%] h-[700px] bg-slate-600">
+      <div className="w-full h-[800px]">
+        <div className="item1ComponentWrap w-[100%] h-[700px] p-2">
           <Searchbox />
           <WeatherInfo />
         </div>
