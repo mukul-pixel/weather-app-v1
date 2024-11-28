@@ -1,7 +1,5 @@
 import axios from "axios";
-import { notFound } from "next/navigation";
 import { NextResponse } from "next/server";
-import { stringify } from "postcss";
 
 export async function GET() {
   try {
@@ -14,14 +12,12 @@ export async function GET() {
       );
     }
 
-    return NextResponse(json(responseData), {
-      status: 200,
-    })
+    return NextResponse.json(responseData, {status: 200});
 
   } catch (error) {
-    console.error("Error in fetachWeather Api - ", error?.message);
+    console.error("Error in fetachWeather Api - ", error);
     return NextResponse.json(
-      { error: "Weather data not found." },
+      { error: "Error in fetachWeather Api.", error},
       { status: 404 }
     );
   }
@@ -29,6 +25,10 @@ export async function GET() {
 
 const fetchWeatherApiData = async () => {
   try {
+
+    const apiKey = process.env.NEXT_PUBLIC_WEATHER_KEY;
+    const apiURL = process.env.NEXT_PUBLIC_WEATHER_API_URL;
+
     const params = {
       lat: 28.7041,
       lon: 77.1025,
@@ -36,22 +36,20 @@ const fetchWeatherApiData = async () => {
       appid: apiKey,
     };
 
-    const apiKey = process.env.NEXT_PUBLIC_WEATHER_KEY;
-    const apiURL = process.env.NEXT_PUBLIC_WEATHER_API_URL;
-
     if (!apiKey || !apiURL) {
       console.error("API key or URL is not defined in the environment variables.");
-      return;s
+      return null;
     }
 
     const response = await axios.get(apiURL, { params });
-    if (response?.data) {
-      return response?.data;
+    if (response.data) {
+      return response.data;
     } else {
-      notFound();
+      return null;
     }
 
   } catch (error) {
-    console.error("Error fetching weather data:", error?.message);
+    console.error("Error fetching weather data:", error);
+    return null;
   }
 }
