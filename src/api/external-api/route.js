@@ -11,8 +11,7 @@ const fetchWeatherData = async () => {
     return;
   }
   const params = {
-    lat: 28.7041,
-    lon: 77.1025,
+    q:"barmer",
     units: "metric",
     appid: apiKey,
   };
