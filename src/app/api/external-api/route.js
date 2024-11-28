@@ -42,8 +42,8 @@ const fetchWeatherApiData = async () => {
     }
 
     const response = await axios.get(apiURL, { params });
-    if (response.data) {
-      return response.data;
+    if (response?.data) {
+      return response?.data;
     } else {
       return null;
     }
