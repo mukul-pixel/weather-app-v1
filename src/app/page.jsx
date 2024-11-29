@@ -6,14 +6,15 @@ import { hourly, days } from '@/data/forecast'
 import UvIndexCard from "@/components/item2/UvIndexCard";
 import WindCard from "@/components/item2/WindCard";
 import { notFound } from "next/navigation";
-import { useState } from "react";
+// import { useState } from "react";
 
 
 export default function Home() {
-  const [city,setCity] = useState("barmer")
-  const [weatherData,setWeatherData] = useState("");
+  // const [city,setCity] = useState("barmer")
+  const weatherData = {};
+  // const [weatherData,setWeatherData] = useState("");
 
-  const fetchWeatherData = async()=>{
+  const fetchWeatherData = async(city)=>{
       const baseApi = process.env.NEXT_PUBLIC_BASE_URL;
       const response = await fetch(`${baseApi}api/external-api?city=${city}`, {cache: "no-store"});
 
@@ -22,8 +23,8 @@ export default function Home() {
         notFound();
       }
 
-      const data = await response.json();  
-      setWeatherData(data); 
+      data = await response.json();  
+      // setWeatherData(data); 
   }
   
   return (
@@ -32,10 +33,10 @@ export default function Home() {
         <div className="item1ComponentWrap w-[100%] h-[700px] p-2">
           {/* using callback to pass data from child component to parent component */}
           <Searchbox onSearch = {(city)=>{
-            setCity(city);
+            // setCity(city);
             fetchWeatherData(city);
           }}/>
-          <WeatherInfo data = {weatherData.main} date = {weatherData.dt} />
+          <WeatherInfo data = {weatherData?.main} date = {weatherData?.dt} />
         </div>
         <div className=" h-[800px]">
           <ForecastCards hourly={hourly}  data={weatherData}/>
