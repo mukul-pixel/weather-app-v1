@@ -32,7 +32,7 @@ const WindCard = () => {
                 </div>
 
                 <div>
-                    <hr class="border-t-4 border-gray-400 border-gray"></hr>
+                    <hr className="border-t-4 border-gray-400 border-gray"></hr>
                 </div>
 
                 <div className='flex justify-start gap-2 py-2'>

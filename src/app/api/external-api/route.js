@@ -1,9 +1,16 @@
 import axios from "axios";
+import { request } from "axios";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request) {
   try {
-    const responseData = await fetchWeatherApiData();
+    // const city = request.params
+    const {searchParams} = new URL(request.url);
+    const city = searchParams.get("city")
+
+    // console.log(city);
+
+    const responseData = await fetchWeatherApiData(city);
 
     if (!responseData){
       return NextResponse.json(
@@ -23,15 +30,14 @@ export async function GET() {
   }
 };
 
-const fetchWeatherApiData = async () => {
+const fetchWeatherApiData = async (city) => {
   try {
 
     const apiKey = process.env.NEXT_PUBLIC_WEATHER_KEY;
     const apiURL = process.env.NEXT_PUBLIC_WEATHER_API_URL;
 
     const params = {
-      lat: 28.7041,
-      lon: 77.1025,
+      q:city,
       units: "metric",
       appid: apiKey,
     };
