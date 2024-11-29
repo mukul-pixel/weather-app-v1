@@ -4,12 +4,8 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   try {
-    // const city = request.params
     const {searchParams} = new URL(request.url);
     const city = searchParams.get("city")
-
-    // console.log(city);
-
     const responseData = await fetchWeatherApiData(city);
 
     if (!responseData){
@@ -18,7 +14,7 @@ export async function GET(request) {
         { status: 404 }
       );
     }
-
+    
     return NextResponse.json(responseData, {status: 200});
 
   } catch (error) {
